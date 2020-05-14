@@ -51,6 +51,8 @@ public class Creator {
     }
 
     // TODO
+    // long function, maybe split into multiple?
+    // David
     public void create() {
         numClasses++;
 
@@ -116,11 +118,15 @@ public class Creator {
         }
     }
 
-    //TODO
+
+    // TODO formatting is wrong
+    // Paul
 private ClassTemplate createClass() {
 	numClasses++;
 	ClassTemplate classTemplate = new ClassTemplate(config.getBasePackage() + ".random", "Random" + numClasses);
-	if (config.getMethodConfig().isFileOperationsEnabled()) {
+    if (config.getMethodConfig().isFileOperationsEnabled()) {
+        // When strings are constants, store them as a constant variable
+        // and pass them around
 		classTemplate.addImport("java.io.File");
 		classTemplate.addImport("java.io.IOException");
 		classTemplate.addImport("java.nio.file.Files");
@@ -133,38 +139,47 @@ private ClassTemplate createClass() {
 	Probability isStatic = new Probability(50);
 
 	for (int i = 0; i < numMethods; i++) {
-		DefaultMethodTemplate method = new DefaultMethodTemplate(classTemplate.getFullClassName(), "method" + i,
-				isStatic.getChance(), config.getMethodConfig());
-		classTemplate.addMethod(method);
+        DefaultMethodTemplate method = new DefaultMethodTemplate(classTemplate.getFullClassName(), "method" + i,
+                isStatic.getChance(), config.getMethodConfig());
+        classTemplate.addMethod(method);
 
-		int numCalls = getNumCalls();
-		for (int j = 0; j < numCalls; j++) {
-			ClassTemplate c;
-			if (numClasses < config.getNumClasses()) {
-				c = createClass();
-			} else {
-				c = getClassTemplate();
-			}
-			for (MethodTemplate m : c.getMethods()) {
-				method.addCall(m);
-			}
-		}
+        int numCalls = getNumCalls();
+        for (int j = 0; j < numCalls; j++) {
+            ClassTemplate c;
+            if (numClasses < config.getNumClasses()) {
+                c = createClass();
+            } else {
+                c = getClassTemplate();
+            }
+            for (MethodTemplate m : c.getMethods()) {
+                method.addCall(m);
+            }
+        }
 	}
 
 	return classTemplate;
 }
 
     // TODO
+    // function name
+    // actually returns a random number
+    // Krish
     private int getNumMethods() {
         return config.getMethodRange().getNumber();
     }
 
     // TODO
+    // function name
+    // actually returns a random number too
+    // Kelvin
     private int getNumCalls() {
         return config.getMethodConfig().getCallRange().getNumber();
     }
 
     // TODO
+    // function name
+    // actually returns a random element of classList
+    // Alice
     private ClassTemplate getClassTemplate() {
         Range r = new Range(0, classList.size() - 1);
         return classList.get(r.getNumber());

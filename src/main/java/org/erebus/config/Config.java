@@ -48,6 +48,8 @@ public class Config {
 
     private final MethodConfig methodConfig;
 
+    // TODO pass in as arguments instead of grabbing from global values
+    // Kevin
     protected Config() {
         numClasses = ConfigProperties.NumberProperties.NUMBER_OF_CLASSES.value;
         methodRange = ConfigProperties.RangeProperties.NUM_METHOD_RANGE.value;
@@ -56,9 +58,14 @@ public class Config {
 
         outputDir = new File(ConfigProperties.StringProperties.OUTPUT_DIRECTORY.value);
         // TODO
+        // side-effect creates a file on system
+        // brittle to failure, in constructor too
         outputDir.mkdirs();
 
         methodConfig = new MethodConfig();
+
+
+        getNumClasses();
     }
 
     public int getNumClasses() {

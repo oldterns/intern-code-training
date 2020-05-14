@@ -34,6 +34,10 @@ public class ConfigFactory {
     }
 
     // TODO
+    // new Config() is confusing
+    // all the for loops are hard to read (maybe extract into functions)
+    // "maybe" the for loops can be reduced
+    // Sonia
     public static Config createConfig(Path configFile) {
         Map<String, String> propertyMap = new HashMap<>();
 

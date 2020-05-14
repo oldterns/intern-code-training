@@ -26,7 +26,9 @@ import org.erebus.creator.Creator;
 
 public class Start {
 
-    // TODO
+    // TODO:
+    // naming needs to be more descriptive
+    // Victor
     private static final String c = "./erebus.conf";
 
     public static void main(String[] args) {
